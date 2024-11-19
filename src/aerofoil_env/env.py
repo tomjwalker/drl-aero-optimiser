@@ -80,11 +80,21 @@ class AerofoilOptimisationEnv(Env):
             alpha=self.alpha
         )
         
-        # Calculate reward
+        # Calculate reward with clipping and scaling
         if coeffs['converged']:
-            reward = coeffs['CL'] / coeffs['CD'] if coeffs['CD'] != 0 else 0
+            if coeffs['CD'] != 0:
+                reward = coeffs['CL'] / coeffs['CD']
+                # Clip reward to reasonable range
+                reward = np.clip(reward, -10.0, 10.0)
+            else:
+                reward = -10.0  # Penalty for zero drag (likely numerical issue)
         else:
-            reward = -1.0  # Penalty for non-convergent shapes
+            reward = -10.0  # Penalty for non-convergent shapes
+        
+        # Add small penalty for extreme shapes to encourage exploration of reasonable designs
+        c, p, t = self._naca_to_state(new_naca)
+        shape_penalty = -0.01 * (c/9 + p/9 + t/99)  # Small penalty increasing with parameter values
+        reward += shape_penalty
         
         # Check if done (we'll use a simple episode length limit)
         done = False
