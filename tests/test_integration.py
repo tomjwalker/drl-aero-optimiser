@@ -1,7 +1,6 @@
 import pytest
 from agents.ppo_agent import PPOAgent
 from experiments.trial import Trial
-from experiments.evaluate import evaluate_agent
 from aerofoil_env.env import AerofoilOptimisationEnv
 
 def test_full_pipeline(tmp_path):
@@ -17,7 +16,13 @@ def test_full_pipeline(tmp_path):
             'learning_rate': 3e-4,
             'n_steps': 4,      # Minimal steps
             'batch_size': 2,   # Minimal batch size
-            'n_epochs': 1
+            'n_epochs': 1,
+            'gamma': 0.99,
+            'gae_lambda': 0.95,
+            'clip_range': 0.2,
+            'normalize_advantage': True,
+            'ent_coef': 0.01,
+            'max_grad_norm': 0.5,
         },
         'seeds': [42],
         'total_timesteps': 8,  # Just enough for 2 updates
