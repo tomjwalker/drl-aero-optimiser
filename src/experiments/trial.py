@@ -1,7 +1,7 @@
 import numpy as np
 from datetime import datetime
 import os
-from experiments.run import Run
+from .run import Run
 
 class Trial:
     def __init__(self, agent_class, env_class, config):
