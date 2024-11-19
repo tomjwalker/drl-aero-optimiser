@@ -17,7 +17,7 @@ def test_step():
     env = AerofoilOptimisationEnv()
     state, _ = env.reset()
     action = np.array([1, 1, 1])  # Increase all parameters
-    next_state, reward, done, truncated, info = env.step(action)
+    next_state, reward, terminated, truncated, info = env.step(action)
     assert isinstance(reward, float)
     assert isinstance(info, dict)
     assert 'naca_code' in info
@@ -51,7 +51,7 @@ def test_non_convergent_case():
     env = AerofoilOptimisationEnv(naca_code='9999')  # An extreme case likely to fail
     state, _ = env.reset()
     action = np.array([1, 1, 1])
-    _, reward, _, _, info = env.step(action)
+    _, reward, terminated, truncated, info = env.step(action)
     assert 'converged' in info['coefficients']
     if not info['coefficients']['converged']:
         assert reward == -1.0  # Check penalty for non-convergent shapes

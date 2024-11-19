@@ -14,4 +14,4 @@ def test_evaluation():
     assert 'std_reward' in results
     assert 'best_design' in results
     assert isinstance(results['mean_reward'], float)
-    assert isinstance(results['std_reward'], float) 
+    assert isinstance(results['std_reward'], float)
