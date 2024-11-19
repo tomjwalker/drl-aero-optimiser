@@ -1,0 +1,32 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# Python byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
+
+# Local development settings
+pyrightconfig.json
+
+# Operating System files
+.DS_Store
+Thumbs.db

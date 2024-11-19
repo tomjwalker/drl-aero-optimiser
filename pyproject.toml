@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drl_aero_optimiser"
+version = "0.1.0"
+authors = [
+    { name = "Your Name" }
+]
+description = "Deep Reinforcement Learning for Aerofoil Optimisation"
+requires-python = ">=3.8"
+
+[tool.setuptools.packages.find]
+include = ["aerofoil_env*"] 
